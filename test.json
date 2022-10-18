@@ -1,0 +1,94 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Authentication",
+    "description": "Personio Authentication API",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://test.de/v1"
+    }
+  ],
+  "paths": {
+    "/a": {
+      "post": {
+        "description": "Some Request Description",
+        "parameters": [
+          {
+            "name": "attribute",
+            "in": "query",
+            "description": "Test attribute",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestResponse"
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "test": "response"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Response": {
+        "title": "Default response object",
+        "required": [
+          "data",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "type": "object",
+            "properties": {}
+          }
+        }
+      },
+      "TestResponse": {
+        "title": "Sample Response Title",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Response"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "data": {
+                "required": [
+                  "test"
+                ],
+                "type": "object",
+                "properties": {
+                  "test": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
